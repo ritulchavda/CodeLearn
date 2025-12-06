@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeLearn - Single File</title>
+
+    <!-- 1. Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. React & ReactDOM (via CDN) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 3. Babel Standalone (to compile JSX in browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Custom Styles for Scrollbar -->
+    <style>
+        /* Custom Scrollbar for dark theme editor */
+        textarea::-webkit-scrollbar { width: 10px; }
+        textarea::-webkit-scrollbar-track { background: #0f172a; }
+        textarea::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
+        textarea::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- App Root -->
+    <div id="root"></div>
+
+    <!-- MAIN REACT SCRIPT -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- ICONS (Inline SVGs to replace lucide-react imports) ---
+        const IconPlay = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        );
+        const IconTerminal = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+        );
+        const IconBookOpen = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        );
+        const IconCode = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        );
+        const IconChevronRight = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="9 18 15 12 9 6"></polyline></svg>
+        );
+        const IconMenu = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        );
+        const IconX = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        );
+        const IconGlobe = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        );
+
+        // --- DATA: Syllabus & Content ---
+        const COURSES = {
+            python: {
+                title: "Python",
+                color: "bg-yellow-500",
+                topics: [
+                {
+                    id: "intro",
+                    title: "Python Intro",
+                    explanation: `Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.\n\nIt is used for:\n• Web development (server-side)\n• Software development\n• Mathematics\n• System scripting\n\nWhat can Python do?\n• Python can be used on a server to create web applications.\n• Python can be used alongside software to create workflows.\n• Python can connect to database systems. It can also read and modify files.`,
+                    code: `# Python Intro\nprint("Hello, World!")\n`
+                },
+                {
+                    id: "syntax",
+                    title: "Python Syntax",
+                    explanation: `Python syntax can be executed by writing directly in the Command Line.\n\nPython Indentation:\nIndentation refers to the spaces at the beginning of a code line. Where in other programming languages the indentation in code is for readability only, the indentation in Python is very important. Python uses indentation to indicate a block of code.`,
+                    code: `if 5 > 2:\n  print("Five is greater than two!")\n`
+                },
+                {
+                    id: "variables",
+                    title: "Python Variables",
+                    explanation: `Variables are containers for storing data values.\n\nCreating Variables:\nPython has no command for declaring a variable. A variable is created the moment you first assign a value to it.`,
+                    code: `x = 5\ny = "John"\nprint(x)\nprint(y)\n`
+                }
+                ]
+            },
+            javascript: {
+                title: "JavaScript",
+                color: "bg-yellow-300",
+                topics: [
+                {
+                    id: "intro",
+                    title: "JS Introduction",
+                    explanation: `JavaScript is the world's most popular programming language. JavaScript is the programming language of the Web.\n\nJavaScript is easy to learn. This tutorial will teach you JavaScript from basic to advanced.`,
+                    code: `// Click Run to see the output\nconsole.log("Hello JavaScript!");\n`
+                },
+                {
+                    id: "variables",
+                    title: "JS Variables",
+                    explanation: `Variables are containers for storing data.\n\nIn JavaScript, there are 3 ways to declare variables:\n• var\n• let\n• const\n\nThe 'let' keyword was introduced in ES6 (2015) and is the modern way to declare variables that can change.`,
+                    code: `let x = 5;\nlet y = 6;\nlet z = x + y;\nconsole.log("The value of z is: " + z);\n`
+                }
+                ]
+            },
+            java: {
+                title: "Java",
+                color: "bg-red-600",
+                topics: [
+                {
+                    id: "intro",
+                    title: "Java Intro",
+                    explanation: `Java is a popular programming language, created in 1995.\n\nIt is owned by Oracle, and more than 3 billion devices run Java.\n\nIt is used for:\n• Mobile applications (especially Android apps)\n• Desktop applications\n• Web applications`,
+                    code: `public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello World");\n  }\n}\n`
+                }
+                ]
+            },
+            cpp: {
+                title: "C++",
+                color: "bg-blue-600",
+                topics: [
+                {
+                    id: "intro",
+                    title: "C++ Intro",
+                    explanation: `C++ is a cross-platform language that can be used to create high-performance applications.\n\nC++ was developed by Bjarne Stroustrup, as an extension to the C language.`,
+                    code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "Hello World!";\n  return 0;\n}\n`
+                }
+                ]
+            }
+        };
+
+        // --- COMPONENT: App ---
+        function App() {
+            const [selectedLang, setSelectedLang] = useState('python');
+            const [activeTopicIndex, setActiveTopicIndex] = useState(0);
+            const [code, setCode] = useState('');
+            const [consoleOutput, setConsoleOutput] = useState([]);
+            const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+            // Load initial code when language or topic changes
+            useEffect(() => {
+                const topic = COURSES[selectedLang].topics[activeTopicIndex];
+                setCode(topic.code);
+                setConsoleOutput([]); // Clear console on topic change
+            }, [selectedLang, activeTopicIndex]);
+
+            // --- LOGIC: Fake Compiler/Runner ---
+            const runCode = () => {
+                setConsoleOutput([]); // Clear previous
+                let outputLog = [];
+
+                const addToLog = (msg) => {
+                    outputLog.push(msg);
+                };
+
+                try {
+                    if (selectedLang === 'javascript') {
+                        // ACTUAL Execution for JS
+                        const originalConsoleLog = console.log;
+                        console.log = (...args) => {
+                            addToLog(args.join(' '));
+                            originalConsoleLog(...args);
+                        };
+                        // Safe execution wrapper
+                        new Function(code)();
+                        console.log = originalConsoleLog;
+                    } else {
+                        // MOCK Execution for other languages
+                        addToLog(`> Compiling ${COURSES[selectedLang].title}...`);
+                        
+                        const lines = code.split('\n');
+                        
+                        lines.forEach(line => {
+                            const trimmed = line.trim();
+                            
+                            // Python Print Logic
+                            if (selectedLang === 'python' && trimmed.startsWith('print(')) {
+                                const match = trimmed.match(/print\((.*)\)/);
+                                if (match && match[1]) {
+                                    const content = match[1].replace(/^["']|["']$/g, ''); 
+                                    if (!match[1].startsWith('"') && !match[1].startsWith("'")) {
+                                        if(code.includes(`${match[1]} =`)) {
+                                            const varMatch = code.match(new RegExp(`${match[1]}\\s*=\\s*(.*)`));
+                                            if(varMatch) addToLog(varMatch[1].replace(/^["']|["']$/g, ''));
+                                            else addToLog(content);
+                                        } else {
+                                            addToLog(content); 
+                                        }
+                                    } else {
+                                        addToLog(content);
+                                    }
+                                }
+                            }
+                            
+                            // Java Print Logic
+                            if (selectedLang === 'java' && trimmed.startsWith('System.out.println(')) {
+                                const match = trimmed.match(/System\.out\.println\((.*)\)/);
+                                if (match) addToLog(match[1].replace(/^["']|["']$/g, ''));
+                            }
+
+                            // C++ Cout Logic
+                            if (selectedLang === 'cpp' && trimmed.startsWith('cout')) {
+                                const parts = trimmed.split('<<');
+                                parts.shift();
+                                let outStr = "";
+                                parts.forEach(p => {
+                                let val = p.trim().replace(';', '');
+                                if(val.startsWith('"')) val = val.replace(/^["']|["']$/g, '');
+                                outStr += val;
+                                });
+                                addToLog(outStr);
+                            }
+                        });
+
+                        setTimeout(() => {
+                            setConsoleOutput(prev => [...outputLog, `\n=== Process exited with code 0 ===`]);
+                        }, 300);
+                        return;
+                    }
+                } catch (err) {
+                    addToLog(`Error: ${err.message}`);
+                }
+                setConsoleOutput(outputLog);
+            };
+
+            const activeTopic = COURSES[selectedLang].topics[activeTopicIndex];
+
+            return (
+                <div className="flex flex-col h-screen bg-white text-gray-900 font-sans overflow-hidden">
+                
+                {/* --- HEADER --- */}
+                <header className="h-16 bg-slate-900 text-white flex items-center justify-between px-6 shadow-md z-20 shrink-0">
+                    <div className="flex items-center gap-2">
+                    <IconCode className="text-green-400" size={28} />
+                    <h1 className="text-xl font-bold tracking-wide">CodeLearn <span className="text-gray-400 font-normal text-sm ml-2">v1.0</span></h1>
+                    </div>
+
+                    {/* Language Selector */}
+                    <div className="flex items-center gap-4">
+                    <label className="text-sm text-gray-300 hidden sm:block">Select Language:</label>
+                    <div className="relative">
+                        <select 
+                        value={selectedLang}
+                        onChange={(e) => {
+                            setSelectedLang(e.target.value);
+                            setActiveTopicIndex(0);
+                        }}
+                        className="bg-slate-700 text-white pl-3 pr-8 py-1.5 rounded border border-slate-600 focus:outline-none focus:border-green-400 appearance-none cursor-pointer"
+                        >
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        </select>
+                        <div className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                        <IconChevronRight className="rotate-90 text-gray-400" size={14} />
+                        </div>
+                    </div>
+                    <button className="sm:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                        <IconMenu size={24} />
+                    </button>
+                    </div>
+                </header>
+
+                {/* --- MAIN BODY --- */}
+                <div className="flex flex-1 overflow-hidden relative">
+                    
+                    {/* --- LEFT COLUMN: SYLLABUS --- */}
+                    <nav 
+                    className={`
+                        absolute sm:relative z-10 w-64 bg-slate-50 border-r border-gray-200 h-full flex flex-col transition-transform duration-300
+                        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'}
+                    `}
+                    >
+                    <div className="p-4 border-b border-gray-200 bg-white flex justify-between items-center">
+                        <h2 className="font-bold text-gray-700 flex items-center gap-2">
+                        <IconBookOpen size={18} /> Syllabus
+                        </h2>
+                        <button className="sm:hidden text-gray-500" onClick={() => setIsSidebarOpen(false)}>
+                        <IconX size={20} />
+                        </button>
+                    </div>
+                    <div className="overflow-y-auto flex-1 p-2 space-y-1">
+                        {COURSES[selectedLang].topics.map((topic, idx) => (
+                        <button
+                            key={topic.id}
+                            onClick={() => {
+                            setActiveTopicIndex(idx);
+                            if (window.innerWidth < 640) setIsSidebarOpen(false);
+                            }}
+                            className={`
+                            w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-colors
+                            ${activeTopicIndex === idx 
+                                ? 'bg-green-100 text-green-800 border-l-4 border-green-500 shadow-sm' 
+                                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'}
+                            `}
+                        >
+                            {topic.title}
+                        </button>
+                        ))}
+                    </div>
+                    </nav>
+
+                    {/* --- MIDDLE COLUMN: EXPLANATION --- */}
+                    <main className="flex-1 overflow-y-auto p-8 bg-white max-w-2xl border-r border-gray-200">
+                    <div className="mb-6">
+                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-2 ${COURSES[selectedLang].color}`}>
+                        {COURSES[selectedLang].title} Tutorial
+                        </span>
+                        <h1 className="text-3xl font-extrabold text-gray-800 mb-4">{activeTopic.title}</h1>
+                        <div className="prose prose-slate max-w-none">
+                        {activeTopic.explanation.split('\n').map((para, i) => (
+                            <p key={i} className="mb-4 text-gray-600 leading-relaxed">
+                            {para}
+                            </p>
+                        ))}
+                        </div>
+                    </div>
+                    
+                    <div className="mt-8 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+                        <h3 className="text-blue-800 font-semibold mb-2 flex items-center gap-2">
+                        <IconGlobe size={16} /> Did you know?
+                        </h3>
+                        <p className="text-sm text-blue-700">
+                        Practice is key! Use the editor on the right to modify the code and see how it changes the output.
+                        </p>
+                    </div>
+                    </main>
+
+                    {/* --- RIGHT COLUMN: EDITOR & CONSOLE --- */}
+                    <aside className="w-full sm:w-[45%] lg:w-[40%] flex flex-col bg-slate-900 border-l border-slate-700">
+                    
+                    {/* Editor Header */}
+                    <div className="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
+                        <span className="text-xs font-mono text-gray-400">main.{selectedLang === 'python' ? 'py' : selectedLang === 'javascript' ? 'js' : selectedLang === 'cpp' ? 'cpp' : 'java'}</span>
+                        <button 
+                        onClick={runCode}
+                        className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-1.5 rounded text-sm font-medium transition-colors shadow-lg active:scale-95"
+                        >
+                        <IconPlay size={14} fill="white" /> Run Code
+                        </button>
+                    </div>
+
+                    {/* Code Editor Area */}
+                    <div className="flex-1 relative group">
+                        <textarea
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                        className="w-full h-full bg-slate-900 text-gray-300 font-mono text-sm p-4 resize-none focus:outline-none leading-6 selection:bg-slate-700"
+                        spellCheck="false"
+                        ></textarea>
+                        {/* Line numbers visual fake */}
+                        <div className="absolute top-4 left-0 w-4 h-full pointer-events-none opacity-0"></div>
+                    </div>
+
+                    {/* Console Output Area */}
+                    <div className="h-1/3 min-h-[150px] bg-black border-t border-slate-700 flex flex-col">
+                        <div className="px-4 py-1 bg-slate-800 text-xs text-gray-400 font-mono border-b border-slate-700 flex items-center gap-2">
+                        <IconTerminal size={12} /> Terminal / Output
+                        </div>
+                        <div className="flex-1 p-4 font-mono text-sm overflow-y-auto">
+                        {consoleOutput.length === 0 ? (
+                            <span className="text-gray-600 italic">Click "Run Code" to see output...</span>
+                        ) : (
+                            consoleOutput.map((line, idx) => (
+                            <div key={idx} className="text-green-400 whitespace-pre-wrap">{line}</div>
+                            ))
+                        )}
+                        </div>
+                    </div>
+                    </aside>
+
+                </div>
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
