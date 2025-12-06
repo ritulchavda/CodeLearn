@@ -75,66 +75,216 @@
                 title: "Python",
                 color: "bg-yellow-500",
                 topics: [
-                {
-                    id: "intro",
-                    title: "Python Intro",
-                    explanation: `Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.\n\nIt is used for:\n• Web development (server-side)\n• Software development\n• Mathematics\n• System scripting\n\nWhat can Python do?\n• Python can be used on a server to create web applications.\n• Python can be used alongside software to create workflows.\n• Python can connect to database systems. It can also read and modify files.`,
-                    code: `# Python Intro\nprint("Hello, World!")\n`
-                },
-                {
-                    id: "syntax",
-                    title: "Python Syntax",
-                    explanation: `Python syntax can be executed by writing directly in the Command Line.\n\nPython Indentation:\nIndentation refers to the spaces at the beginning of a code line. Where in other programming languages the indentation in code is for readability only, the indentation in Python is very important. Python uses indentation to indicate a block of code.`,
-                    code: `if 5 > 2:\n  print("Five is greater than two!")\n`
-                },
-                {
-                    id: "variables",
-                    title: "Python Variables",
-                    explanation: `Variables are containers for storing data values.\n\nCreating Variables:\nPython has no command for declaring a variable. A variable is created the moment you first assign a value to it.`,
-                    code: `x = 5\ny = "John"\nprint(x)\nprint(y)\n`
-                }
+                    {
+                        id: "intro",
+                        title: "1. Python Intro",
+                        explanation: `Python is a popular programming language. It is known for its simple syntax and readability.\n\nIt is used for:\n• Web development\n• Data Science\n• Machine Learning\n\nExample:\nThe print() function is used to output text to the screen.`,
+                        code: `# Python Intro\nprint("Hello, World!")`
+                    },
+                    {
+                        id: "syntax",
+                        title: "2. Syntax & Indentation",
+                        explanation: `Python uses indentation (whitespace) to define blocks of code, unlike other languages that use curly brackets {}.\n\nIf you skip indentation, Python will give you an error.\n\nThe number of spaces is up to you as a programmer, but it must be at least one (four is standard).`,
+                        code: `if 5 > 2:\n  print("Five is greater than two!")\n  print("Indentation is important!")`
+                    },
+                    {
+                        id: "variables",
+                        title: "3. Variables",
+                        explanation: `Variables are containers for storing data values.\n\nPython has no command for declaring a variable. A variable is created the moment you first assign a value to it.\n\nVariables do not need to be declared with any particular type.`,
+                        code: `x = 5\nname = "Alice"\nprint(x)\nprint(name)`
+                    },
+                    {
+                        id: "datatypes",
+                        title: "4. Data Types",
+                        explanation: `Python has the following data types built-in by default:\n\n• Text Type: str\n• Numeric Types: int, float\n• Sequence Types: list, tuple\n\nYou can get the data type of any object by using the type() function.`,
+                        code: `x = 5\ny = "Hello"\nz = 20.5\n\nprint(type(x))\nprint(type(y))\nprint(type(z))`
+                    },
+                    {
+                        id: "conditions",
+                        title: "5. If...Else Conditions",
+                        explanation: `Python supports the usual logical conditions from mathematics:\n• Equals: a == b\n• Not Equals: a != b\n• Less than: a < b\n\nThese conditions can be used in "if" statements to handle decision making.`,
+                        code: `a = 200\nb = 33\nif b > a:\n  print("b is greater than a")\nelif a == b:\n  print("a and b are equal")\nelse:\n  print("a is greater than b")`
+                    },
+                    {
+                        id: "lists",
+                        title: "6. Lists (Arrays)",
+                        explanation: `Lists are used to store multiple items in a single variable.\n\nLists are created using square brackets [].\n\nList items are ordered, changeable, and allow duplicate values.`,
+                        code: `fruits = ["apple", "banana", "cherry"]\nprint(fruits)\n\n# Access item\nprint(fruits[0])\n\n# Change item\nfruits[1] = "blackcurrant"\nprint(fruits)`
+                    },
+                    {
+                        id: "loops",
+                        title: "7. Loops",
+                        explanation: `Python has two primitive loop commands:\n• while loops\n• for loops\n\nA for loop is used for iterating over a sequence (like a list, a tuple, or a string).`,
+                        code: `fruits = ["apple", "banana", "cherry"]\nfor x in fruits:\n  print(x)\n\nprint("---")\n\nfor x in range(3):\n  print(x)`
+                    },
+                    {
+                        id: "functions",
+                        title: "8. Functions",
+                        explanation: `A function is a block of code which only runs when it is called.\n\nYou can pass data, known as parameters, into a function.\n\nIn Python a function is defined using the 'def' keyword.`,
+                        code: `def my_function(fname):\n  print("Hello " + fname)\n\nmy_function("Emil")\nmy_function("Tobias")`
+                    }
                 ]
             },
             javascript: {
                 title: "JavaScript",
                 color: "bg-yellow-300",
                 topics: [
-                {
-                    id: "intro",
-                    title: "JS Introduction",
-                    explanation: `JavaScript is the world's most popular programming language. JavaScript is the programming language of the Web.\n\nJavaScript is easy to learn. This tutorial will teach you JavaScript from basic to advanced.`,
-                    code: `// Click Run to see the output\nconsole.log("Hello JavaScript!");\n`
-                },
-                {
-                    id: "variables",
-                    title: "JS Variables",
-                    explanation: `Variables are containers for storing data.\n\nIn JavaScript, there are 3 ways to declare variables:\n• var\n• let\n• const\n\nThe 'let' keyword was introduced in ES6 (2015) and is the modern way to declare variables that can change.`,
-                    code: `let x = 5;\nlet y = 6;\nlet z = x + y;\nconsole.log("The value of z is: " + z);\n`
-                }
+                    {
+                        id: "intro",
+                        title: "1. JS Introduction",
+                        explanation: `JavaScript is the world's most popular programming language. It is the language of the Web.\n\nJavaScript can change HTML content, attribute values, and styles.\n\nExample:\nconsole.log() is used to print messages to the browser console.`,
+                        code: `// JS Introduction\nconsole.log("Hello, World!");\nconsole.log("JavaScript is fun!");`
+                    },
+                    {
+                        id: "variables",
+                        title: "2. Variables",
+                        explanation: `There are 3 ways to declare a JavaScript variable:\n\n• var (old school)\n• let (modern, block scoped)\n• const (cannot be reassigned)\n\nAlways use const if the value should not be changed. Always use let if you can't use const.`,
+                        code: `let name = "John";\nconst pi = 3.14;\n\nconsole.log(name);\nconsole.log(pi);\n\nname = "Jane"; // This is allowed\nconsole.log(name);`
+                    },
+                    {
+                        id: "datatypes",
+                        title: "3. Data Types",
+                        explanation: `JavaScript variables can hold different data types:\n\n• Numbers\n• Strings\n• Objects\n• Booleans\n\nJavaScript has dynamic types. This means that the same variable can be used to hold different data types.`,
+                        code: `let length = 16;          // Number\nlet lastName = "Johnson"; // String\nlet x = {firstName:"John", lastName:"Doe"}; // Object\n\nconsole.log(typeof length);\nconsole.log(typeof lastName);`
+                    },
+                    {
+                        id: "operators",
+                        title: "4. Operators",
+                        explanation: `Operators are used to perform arithmetic on numbers:\n +  Addition\n -  Subtraction\n * Multiplication\n /  Division\n\nThe assignment operator (=) assigns a value to a variable.`,
+                        code: `let x = 5;\nlet y = 2;\nlet z = x + y;\n\nconsole.log("The sum is: " + z);\nconsole.log(x * y);`
+                    },
+                    {
+                        id: "functions",
+                        title: "5. Functions",
+                        explanation: `A JavaScript function is a block of code designed to perform a particular task.\n\nA function is executed when "something" invokes it (calls it).\n\nSyntax:\nfunction name(parameter1, parameter2) { code }`,
+                        code: `function toCelsius(fahrenheit) {\n  return (5/9) * (fahrenheit-32);\n}\n\nlet value = toCelsius(77);\nconsole.log("77F is " + value + "C");`
+                    },
+                    {
+                        id: "strings",
+                        title: "6. Strings",
+                        explanation: `Strings are for storing text. Strings are written with quotes.\n\nYou can use single or double quotes.\n\nYou can find the length of a string with the built-in property length.`,
+                        code: `let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";\nconsole.log("Length is: " + text.length);\n\nlet part = text.slice(0, 5);\nconsole.log("First 5 chars: " + part);`
+                    },
+                    {
+                        id: "arrays",
+                        title: "7. Arrays",
+                        explanation: `An array is a special variable, which can hold more than one value.\n\nIt is a common practice to declare arrays with the const keyword.\n\nYou access an array element by referring to the index number.`,
+                        code: `const cars = ["Saab", "Volvo", "BMW"];\nconsole.log(cars[0]);\n\ncars[0] = "Toyota";\nconsole.log(cars);\n\nconsole.log("I have " + cars.length + " cars.");`
+                    },
+                    {
+                        id: "loops",
+                        title: "8. Loops",
+                        explanation: `Loops can execute a block of code a number of times.\n\nThe most common loop is the 'for' loop.\n\nSyntax:\nfor (expression 1; expression 2; expression 3) {\n  // code block to be executed\n}`,
+                        code: `console.log("Counting to 5:");\n\nfor (let i = 0; i < 5; i++) {\n  console.log("The number is " + i);\n}`
+                    }
                 ]
             },
             java: {
                 title: "Java",
                 color: "bg-red-600",
                 topics: [
-                {
-                    id: "intro",
-                    title: "Java Intro",
-                    explanation: `Java is a popular programming language, created in 1995.\n\nIt is owned by Oracle, and more than 3 billion devices run Java.\n\nIt is used for:\n• Mobile applications (especially Android apps)\n• Desktop applications\n• Web applications`,
-                    code: `public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello World");\n  }\n}\n`
-                }
+                    {
+                        id: "intro",
+                        title: "1. Java Intro",
+                        explanation: `Java is a popular programming language, created in 1995.\n\nEvery line of code that runs in Java must be inside a class.\n\nThe main() method is required and you will see it in every Java program.`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello World");\n  }\n}`
+                    },
+                    {
+                        id: "variables",
+                        title: "2. Variables",
+                        explanation: `In Java, there are different types of variables:\n\n• String: Text, surrounded by double quotes\n• int: Integers (whole numbers)\n• float: Floating point numbers\n• char: Single characters, like 'a' or 'B'\n• boolean: true or false`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    String name = "John";\n    int myNum = 15;\n    System.out.println(name);\n    System.out.println(myNum);\n  }\n}`
+                    },
+                    {
+                        id: "datatypes",
+                        title: "3. Data Types",
+                        explanation: `Data types are divided into two groups:\n\n1. Primitive data types (byte, short, int, long, float, double, boolean, char)\n2. Non-primitive data types (String, Arrays, Classes)`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    int myNum = 5;               // Integer (whole number)\n    float myFloatNum = 5.99f;    // Floating point number\n    char myLetter = 'D';         // Character\n    boolean myBool = true;       // Boolean\n    String myText = "Hello";     // String\n    System.out.println(myText);\n  }\n}`
+                    },
+                    {
+                        id: "operators",
+                        title: "4. Operators",
+                        explanation: `Operators are used to perform operations on variables and values.\n\nCommon operators:\n+ (Addition)\n- (Subtraction)\n* (Multiplication)\n/ (Division)\n% (Modulus/Remainder)`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    int sum1 = 100 + 50;\n    int sum2 = sum1 + 250;\n    System.out.println(sum2);\n    System.out.println(10 % 3); // Remainder of 10/3\n  }\n}`
+                    },
+                    {
+                        id: "conditions",
+                        title: "5. If...Else",
+                        explanation: `Java supports logical conditions:\n\n• Less than: a < b\n• Less than or equal to: a <= b\n• Greater than: a > b\n• Equal to: a == b\n\nUse if to specify a block of code to be executed, if a specified condition is true.`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    int time = 20;\n    if (time < 18) {\n      System.out.println("Good day.");\n    } else {\n      System.out.println("Good evening.");\n    }\n  }\n}`
+                    },
+                    {
+                        id: "loops",
+                        title: "6. Loops",
+                        explanation: `Loops can execute a block of code as long as a specified condition is reached.\n\nJava has 'while' loops and 'for' loops.\n\nFor loops are typically used when you know exactly how many times you want to loop.`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    for (int i = 0; i < 5; i++) {\n      System.out.println(i);\n    }\n  }\n}`
+                    },
+                    {
+                        id: "arrays",
+                        title: "7. Arrays",
+                        explanation: `Arrays are used to store multiple values in a single variable.\n\nTo declare an array, define the variable type with square brackets.\n\nAccess elements using index numbers (starts at 0).`,
+                        code: `public class Main {\n  public static void main(String[] args) {\n    String[] cars = {"Volvo", "BMW", "Ford"};\n    System.out.println(cars[0]);\n    System.out.println(cars.length);\n  }\n}`
+                    },
+                    {
+                        id: "methods",
+                        title: "8. Methods",
+                        explanation: `A method is a block of code which only runs when it is called.\n\nYou can pass data, known as parameters, into a method.\n\nMethods are used to perform certain actions, and they are also known as functions.`,
+                        code: `public class Main {\n  static void myMethod() {\n    System.out.println("I just got executed!");\n  }\n\n  public static void main(String[] args) {\n    myMethod();\n    myMethod();\n  }\n}`
+                    }
                 ]
             },
             cpp: {
                 title: "C++",
                 color: "bg-blue-600",
                 topics: [
-                {
-                    id: "intro",
-                    title: "C++ Intro",
-                    explanation: `C++ is a cross-platform language that can be used to create high-performance applications.\n\nC++ was developed by Bjarne Stroustrup, as an extension to the C language.`,
-                    code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "Hello World!";\n  return 0;\n}\n`
-                }
+                    {
+                        id: "intro",
+                        title: "1. C++ Intro",
+                        explanation: `C++ is a cross-platform language that can be used to create high-performance applications.\n\nC++ was developed by Bjarne Stroustrup.\n\n#include <iostream> is a header file library that lets us work with input and output objects.`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "Hello World!";\n  return 0;\n}`
+                    },
+                    {
+                        id: "syntax",
+                        title: "2. Syntax",
+                        explanation: `A C++ program has the following components:\n\n• Libraries (#include)\n• The main() function (entry point)\n• Statements (ending with ;)\n• return 0 (ends the main function)`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "I am learning C++";\n  return 0;\n}`
+                    },
+                    {
+                        id: "output",
+                        title: "3. Output (cout)",
+                        explanation: `The cout object, together with the << operator, is used to output values/print text.\n\nYou can add as many cout objects as you want.\n\nTo insert a new line, use the \\n character.`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "Hello World!\\n";\n  cout << "I am learning C++";\n  return 0;\n}`
+                    },
+                    {
+                        id: "variables",
+                        title: "4. Variables",
+                        explanation: `Variables are containers for storing data values.\n\nIn C++, there are different types of variables:\n• int: integers\n• double: floating point numbers\n• char: single characters\n• string: text\n• bool: true/false`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  int myNum = 15;\n  cout << myNum;\n  return 0;\n}`
+                    },
+                    {
+                        id: "datatypes",
+                        title: "5. Data Types",
+                        explanation: `Data types specify the size and type of information the variable will store.\n\n1. Numeric types (int, float, double)\n2. Boolean type (bool)\n3. Character type (char, string)`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  int myNum = 5;\n  double myFloatNum = 5.99;\n  char myLetter = 'D';\n  cout << myFloatNum;\n  return 0;\n}`
+                    },
+                    {
+                        id: "operators",
+                        title: "6. Operators",
+                        explanation: `Operators are used to perform operations on variables and values.\n\n• Arithmetic: +, -, *, /, %, ++, --\n• Assignment: =, +=, -=\n• Comparison: ==, !=, >, <`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  int x = 100 + 50;\n  cout << "Sum: " << x;\n  return 0;\n}`
+                    },
+                    {
+                        id: "loops",
+                        title: "7. Loops",
+                        explanation: `Loops can execute a block of code as long as a specified condition is reached.\n\nC++ loops are very similar to Java and C.\n\nThe 'while' loop loops through a block of code as long as a specified condition is true.`,
+                        code: `#include <iostream>\nusing namespace std;\n\nint main() {\n  int i = 0;\n  while (i < 5) {\n    cout << i << "\\n";\n    i++;\n  }\n  return 0;\n}`
+                    },
+                    {
+                        id: "functions",
+                        title: "8. Functions",
+                        explanation: `A function is a block of code which only runs when it is called.\n\nYou can pass data, known as parameters, into a function.\n\nFunctions are used to perform certain actions, and they are important for reusing code: Define the code once, and use it many times.`,
+                        code: `#include <iostream>\nusing namespace std;\n\nvoid myFunction() {\n  cout << "I just got executed!";\n}\n\nint main() {\n  myFunction();\n  return 0;\n}`
+                    }
                 ]
             }
         };
